@@ -462,6 +462,41 @@ section {
     line-height: 1.8;
 }
 
+/* ===== Contact Page Specific ===== */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 28px;
+}
+
+.contact-form input[type="text"], .contact-form input[type="email"], .contact-form input[type="tel"], .contact-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    margin-top: 8px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 8px;
+    color: var(--text-primary);
+    transition: box-shadow 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 6px 30px rgba(0,255,178,0.06);
+    transform: translateY(-2px);
+}
+
+.contact-form label { color: var(--text-secondary); font-size: 0.9rem; }
+
+.card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; }
+
+.btn-ghost { background: transparent; color: var(--accent-primary); border: 1px solid rgba(255,255,255,0.04); padding:10px 14px; border-radius:8px; }
+
+@media (max-width: 880px) {
+    .contact-grid { grid-template-columns: 1fr; }
+}
+
 /* ===== Features Section ===== */
 .features-section {
     background: rgba(10, 26, 46, 0.5);
@@ -506,6 +541,52 @@ section {
 
 .feature-item:hover::after {
     opacity: 0.3;
+}
+
+/* Section card hover + light sweep effects (applies to many card types) */
+.intro-card, .event-card, .platform-card, .learn-card, .feature-item, .tool-card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.28s cubic-bezier(.2,.9,.3,1), box-shadow 0.28s ease, border-color 0.28s ease;
+}
+.intro-card::after, .event-card::after, .platform-card::after, .learn-card::after, .feature-item::after, .tool-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 10% 10%, rgba(0,255,178,0.06), rgba(0,255,178,0.02) 10%, transparent 30%), linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+    opacity: 0;
+    transform: translateX(-6%);
+    transition: opacity 0.36s ease, transform 0.6s cubic-bezier(.2,.9,.3,1);
+}
+.intro-card:hover, .event-card:hover, .platform-card:hover, .learn-card:hover, .feature-item:hover, .tool-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 50px rgba(0,255,178,0.08), 0 6px 18px rgba(0,0,0,0.25);
+    border-color: var(--accent-primary);
+}
+.intro-card:hover::after, .event-card:hover::after, .platform-card:hover::after, .learn-card:hover::after, .feature-item:hover::after, .tool-card:hover::after {
+    opacity: 1;
+    transform: translateX(6%);
+}
+
+/* small sparkle along the top edge on hover */
+.intro-card::before, .event-card::before, .platform-card::before, .learn-card::before, .feature-item::before, .tool-card::before {
+    content: '';
+    position: absolute;
+    left: -30%;
+    top: -40%;
+    width: 60%;
+    height: 140%;
+    background: linear-gradient(120deg, rgba(255,255,255,0.06), rgba(0,255,178,0.06), rgba(0,194,255,0.04));
+    transform: rotate(-18deg) translateX(-100%);
+    opacity: 0;
+    filter: blur(10px);
+    transition: transform 0.7s cubic-bezier(.2,.9,.3,1), opacity 0.5s ease;
+    pointer-events: none;
+}
+.intro-card:hover::before, .event-card:hover::before, .platform-card:hover::before, .learn-card:hover::before, .feature-item:hover::before, .tool-card:hover::before {
+    transform: rotate(-18deg) translateX(20%);
+    opacity: 0.7;
 }
 
 .feature-number {
@@ -829,6 +910,38 @@ section {
 @media (max-width:600px){
   .tool-actions{flex-direction:column;align-items:flex-start}
   .btn{width:100%}
+}
+
+/* Colorful animated hover overlay for buttons (applies to .btn and .event-cta) */
+.btn, .event-cta {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.24s ease, box-shadow 0.24s ease;
+}
+.btn::after, .event-cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(255,59,48,0.08), rgba(0,255,178,0.08), rgba(0,194,255,0.08), rgba(255,94,87,0.06));
+    background-size: 300% 100%;
+    opacity: 0;
+    transform: translateX(0);
+    transition: opacity 0.35s ease, transform 0.6s cubic-bezier(.2,.9,.3,1);
+}
+.btn > *, .event-cta > * { position: relative; z-index: 1; }
+.btn:hover::after, .event-cta:hover::after {
+    opacity: 1;
+    transform: translateX(-10%);
+    animation: hueShift 1.6s linear infinite;
+}
+.btn:hover, .event-cta:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 18px 40px rgba(0,0,0,0.12); }
+
+@keyframes hueShift {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 0%; }
+    100% { background-position: 0% 0%; }
 }
 
 /* ===== OSINT Page Styles ===== */

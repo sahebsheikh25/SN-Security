@@ -294,6 +294,10 @@ console.log('%cInterested in cybersecurity? Check out our resources!', 'color: #
 document.addEventListener('DOMContentLoaded', function () {
     const cards = document.querySelectorAll('.tool-card');
     cards.forEach(card => {
+        // remove any legacy duplicate HTML blocks if present
+        card.querySelectorAll('.duplicate-buttons').forEach(el => el.remove());
+        // skip if actions already injected (prevents duplicates)
+        if (card.querySelector('.tool-actions')) return;
         // try to get tool slug from onclick attribute
         let slug = '';
         const onclick = card.getAttribute('onclick') || '';
@@ -344,16 +348,19 @@ document.addEventListener('DOMContentLoaded', function () {
         dl.target = '_blank';
         dl.rel = 'noopener noreferrer';
         dl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>Download</span>';
+        // prevent parent onclick from firing when clicking buttons
+        dl.addEventListener('click', function(e){ e.stopPropagation(); });
 
         // youtube (TR) button (search results in Turkish tutorials)
         const yt = document.createElement('a');
         // make YouTube button use same pill shape as download button for consistent UI
-        yt.className = 'btn btn-download btn-youtube';
+        yt.className = 'btn btn-youtube';
         yt.target = '_blank';
         yt.rel = 'noopener noreferrer';
         const query = encodeURIComponent(slug + ' tutorial Türkçe');
         yt.href = `https://www.youtube.com/results?search_query=${query}`;
         yt.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 15l5.19-3L10 9v6z"/></svg><span>Watch Now</span>';
+        yt.addEventListener('click', function(e){ e.stopPropagation(); });
 
         actions.appendChild(dl);
         actions.appendChild(yt);

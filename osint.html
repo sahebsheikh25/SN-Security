@@ -44,10 +44,11 @@
     .tool-btn.secondary:hover, .tool-btn.secondary:focus{box-shadow:0 12px 36px rgba(80,150,255,0.08),0 0 12px rgba(80,150,255,0.04) inset;transform:translateY(-2px) scale(1.01)}
     .tool-btn.secondary:active{background:linear-gradient(90deg,#0b1320,#071722);color:#cfe6ff}
     
-    /* Top marquee notification */
-    .top-marquee{position:relative;overflow:hidden;background:transparent;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.02);z-index:999}
-    .top-marquee .marquee-inner{display:inline-block;white-space:nowrap;will-change:transform;animation:marquee 28s linear infinite}
-    .top-marquee a{display:inline-block;padding:8px 16px;font-weight:800;color:#9ef0ff;text-decoration:none;font-family:var(--font-heading);font-size:1rem;text-shadow:0 0 14px rgba(158,240,255,0.85),0 0 36px rgba(60,180,230,0.12);}
+    /* Top marquee notification - continuous right-to-left glowing sky-blue banner */
+    .top-marquee{position:relative;overflow:hidden;background:linear-gradient(90deg, rgba(2,12,25,0.55), rgba(3,18,34,0.45));padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.03);z-index:999}
+    .top-marquee .marquee-inner{display:flex;align-items:center;gap:64px;white-space:nowrap;will-change:transform;animation:marquee 60s linear infinite}
+    .top-marquee a{display:inline-block;padding:8px 18px;font-weight:800;color:#9ef0ff;text-decoration:none;font-family:var(--font-heading);font-size:1rem;border-radius:6px;box-shadow:0 6px 28px rgba(158,240,255,0.12),0 0 26px rgba(60,180,230,0.06) inset;}
+    .top-marquee a:hover{filter:brightness(1.06);text-decoration:underline}
     @keyframes marquee{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
 
     @media (max-width:720px){.tool-btn{flex:1 1 100%;justify-content:center}}
@@ -59,7 +60,7 @@
   <nav class="navbar">
     <div class="nav-container">
       <div class="nav-logo">
-        <img src="https://mgx-backend-cdn.metadl.com/generate/images/456529/2025-12-28/f2c4b775-eb04-492d-aa58-b057f6572a9f.png" alt="SN Security Logo">
+        <img src="assets/logo.svg" alt="SN Security Logo">
         <span>SN Security</span>
       </div>
       <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
@@ -67,6 +68,7 @@
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="roadmap.html" class="nav-link">Roadmap</a></li>
         <li><a href="tools.html" class="nav-link">Tools</a></li>
+        <li><a href="ctf-news.html" class="nav-link">CTF & News</a></li>
         <li><a href="osint.html" class="nav-link active">OSINT</a></li>
         <li><a href="about.html" class="nav-link">About</a></li>
         <li><a href="contact.html" class="nav-link">Contact</a></li>
@@ -75,7 +77,8 @@
   </nav>
 
   <div class="top-marquee" role="region" aria-label="Site notification">
-    <div class="marquee-inner">
+    <div class="marquee-inner" aria-hidden="false">
+      <a href="https://www.ceir.gov.in/Request/CeirUserBlockRequestDirect.jsp" target="_blank" rel="noopener noreferrer">Lost / Stolen Mobile? Block It Now — CLICK HERE</a>
       <a href="https://www.ceir.gov.in/Request/CeirUserBlockRequestDirect.jsp" target="_blank" rel="noopener noreferrer">Lost / Stolen Mobile? Block It Now — CLICK HERE</a>
     </div>
   </div>
@@ -463,18 +466,18 @@
       <div class="footer-content">
         <div class="footer-section">
           <div class="footer-logo">
-            <img src="https://mgx-backend-cdn.metadl.com/generate/images/456529/2025-12-28/f2c4b775-eb04-492d-aa58-b057f6572a9f.png" alt="SN Security">
+            <img src="assets/logo.svg" alt="SN Security">
             <span>SN Security</span>
           </div>
           <p class="footer-tagline">Learn Hacking. Secure Future.</p>
           <div class="social-links">
-            <a href="#" class="social-link" aria-label="Twitter">
+            <a href="https://x.com/" class="social-link" aria-label="Twitter" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
             </a>
-            <a href="#" class="social-link" aria-label="GitHub">
+            <a href="https://github.com/sahebsheikh25" class="social-link" aria-label="GitHub" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
             </a>
-            <a href="#" class="social-link" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/sahebsheikh/" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
             </a>
             <a href="#" class="social-link" aria-label="YouTube">
