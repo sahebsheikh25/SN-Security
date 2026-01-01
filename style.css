@@ -64,6 +64,11 @@ body {
     padding: 1rem 0;
 }
 
+.navbar.scrolled{
+    background: rgba(7, 18, 31, 0.98);
+    box-shadow: 0 5px 20px rgba(0, 255, 178, 0.1);
+}
+
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -88,6 +93,28 @@ body {
     width: 40px;
     height: 40px;
     filter: drop-shadow(0 0 10px var(--glow-color));
+}
+
+/* Clickable logo link styles */
+.nav-logo a,
+.footer-logo a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-weight: 700;
+}
+
+.nav-logo a span,
+.footer-logo a span { color: var(--accent-primary); }
+
+.nav-logo a:focus-visible,
+.footer-logo a:focus-visible {
+    outline: 2px solid rgba(0,255,178,0.14);
+    outline-offset: 3px;
+    border-radius: 6px;
 }
 
 .nav-menu {
@@ -234,7 +261,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 120px 20px 60px;
-    background: url('https://mgx-backend-cdn.metadl.com/generate/images/456529/2025-12-28/844b1999-ec03-42e7-b269-e10bcfbfd467.png') center/cover fixed;
+    background: linear-gradient(135deg, rgba(1,9,19,0.9) 0%, rgba(10,26,46,0.8) 100%);
     position: relative;
 }
 

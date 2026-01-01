@@ -1,88 +1,18 @@
-// Initialize AOS (Animate On Scroll)
-AOS.init({
-    duration: 1000,
-    once: true,
-    offset: 100
-});
+// Initialize AOS (Animate On Scroll) if available
+if (typeof AOS !== 'undefined') {
+    AOS.init({ duration: 1000, once: true, offset: 100 });
+}
 
-// Particle.js Configuration
-particlesJS('particles-js', {
-    particles: {
-        number: {
-            value: 80,
-            density: {
-                enable: true,
-                value_area: 800
-            }
-        },
-        color: {
-            value: '#00FFB2'
-        },
-        shape: {
-            type: 'circle',
-            stroke: {
-                width: 0,
-                color: '#000000'
-            }
-        },
-        opacity: {
-            value: 0.5,
-            random: false,
-            anim: {
-                enable: false
-            }
-        },
-        size: {
-            value: 3,
-            random: true,
-            anim: {
-                enable: false
-            }
-        },
-        line_linked: {
-            enable: true,
-            distance: 150,
-            color: '#00FFB2',
-            opacity: 0.4,
-            width: 1
-        },
-        move: {
-            enable: true,
-            speed: 2,
-            direction: 'none',
-            random: false,
-            straight: false,
-            out_mode: 'out',
-            bounce: false
-        }
-    },
-    interactivity: {
-        detect_on: 'canvas',
-        events: {
-            onhover: {
-                enable: true,
-                mode: 'grab'
-            },
-            onclick: {
-                enable: true,
-                mode: 'push'
-            },
-            resize: true
-        },
-        modes: {
-            grab: {
-                distance: 140,
-                line_linked: {
-                    opacity: 1
-                }
-            },
-            push: {
-                particles_nb: 4
-            }
-        }
-    },
-    retina_detect: true
-});
+// Particle.js initialization only if library is present
+if (typeof particlesJS === 'function') {
+    try{
+        particlesJS('particles-js', {
+            particles: { number:{ value:80, density:{ enable:true, value_area:800 } }, color:{ value:'#00FFB2' }, shape:{ type:'circle', stroke:{ width:0, color:'#000000' } }, opacity:{ value:0.5, random:false, anim:{ enable:false } }, size:{ value:3, random:true, anim:{ enable:false } }, line_linked:{ enable:true, distance:150, color:'#00FFB2', opacity:0.4, width:1 }, move:{ enable:true, speed:2, direction:'none', random:false, straight:false, out_mode:'out', bounce:false } },
+            interactivity: { detect_on:'canvas', events:{ onhover:{ enable:true, mode:'grab' }, onclick:{ enable:true, mode:'push' }, resize:true }, modes:{ grab:{ distance:140, line_linked:{ opacity:1 } }, push:{ particles_nb:4 } } },
+            retina_detect: true
+        });
+    }catch(e){ /* silent */ }
+}
 
 // Typed.js Configuration
 document.addEventListener('DOMContentLoaded', function() {
@@ -159,13 +89,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Navbar Background on Scroll
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.style.background = 'rgba(7, 18, 31, 0.98)';
-        navbar.style.boxShadow = '0 5px 20px rgba(0, 255, 178, 0.1)';
-    } else {
-        navbar.style.background = 'rgba(7, 18, 31, 0.95)';
-        navbar.style.boxShadow = 'none';
-    }
+    if (!navbar) return;
+    if (window.scrollY > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled');
 });
 
 // Form Validation and Success Popup (for contact page)

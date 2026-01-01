@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>OSINT Tools & Resources - SN Security</title>
-  <link rel="stylesheet" href="./style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="preload" href="./style.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="./style.css"></noscript>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" as="style" onload="this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet"></noscript>
   <style>
-    .tools-hero{min-height:60vh;display:flex;align-items:center;justify-content:center;padding:120px 20px 60px;background:url('https://mgx-backend-cdn.metadl.com/generate/images/456529/2025-12-28/844b1999-ec03-42e7-b269-e10bcfbfd467.png') center/cover;position:relative}
+    .tools-hero{min-height:60vh;display:flex;align-items:center;justify-content:center;padding:120px 20px 60px;background:linear-gradient(135deg, rgba(1,9,19,0.9) 0%, rgba(10,26,46,0.8)100%);position:relative}
     .tools-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg, rgba(1,9,19,0.9) 0%, rgba(10,26,46,0.8)100%)}
     .tools-hero .hero-content{position:relative;z-index:1;text-align:center}
     .hero-title{font-family:var(--font-heading);color:var(--accent-primary);font-size:3rem;letter-spacing:2px;margin:0 0 8px;text-transform:uppercase}
@@ -75,8 +75,10 @@
   <nav class="navbar">
     <div class="nav-container">
       <div class="nav-logo">
-        <img src="assets/logo.svg" alt="SN Security Logo">
-        <span>SN Security</span>
+        <a href="index.html" class="nav-home" aria-label="SN Security Home">
+          <img src="assets/logo.svg" alt="SN Security Logo" width="40" height="40" decoding="async" loading="eager">
+          <span>SN Security</span>
+        </a>
       </div>
       <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
       <ul class="nav-menu" id="navMenu">
@@ -630,7 +632,7 @@
       <div class="footer-content">
         <div class="footer-section">
           <div class="footer-logo">
-            <img src="assets/logo.svg" alt="SN Security">
+            <img src="assets/logo.svg" alt="SN Security" width="40" height="40" decoding="async" loading="eager">
             <span>SN Security</span>
           </div>
           <p class="footer-tagline">Learn Hacking. Secure Future.</p>
@@ -681,9 +683,30 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="./script.js"></script>
+  <script>
+    // Lazy-load AOS (animations) and Particles to avoid render-blocking.
+    window.addEventListener('load', function(){
+      if(document.querySelector('[data-aos]')){
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://unpkg.com/aos@2.3.1/dist/aos.css';
+        document.head.appendChild(link);
+        var s = document.createElement('script');
+        s.src = 'https://unpkg.com/aos@2.3.1/dist/aos.js';
+        s.defer = true;
+        s.onload = function(){ if(window.AOS) AOS.init({once:true,disableMutationObserver:true}); };
+        document.body.appendChild(s);
+      }
+
+      // Load particles only on larger viewports where effect is visible
+      if(window.innerWidth > 800 && document.getElementById('particles-js')){
+        var p = document.createElement('script');
+        p.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+        p.defer = true;
+        document.body.appendChild(p);
+      }
+    });
+  </script>
+  <script src="./script.js" defer></script>
 </body>
 </html>
